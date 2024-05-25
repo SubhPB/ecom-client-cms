@@ -5,3 +5,25 @@
 html, body :root {
   height: 100%,
 }
+
+.loading-animation{
+  display: inline-block;
+  border-radius: 50%;
+  animation: spinner 1s ease infinite;
+
+}
+
+.hide-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4em; 
+}
+
+@keyframes spinner {
+  100%{
+      transform: rotate(360deg);
+  }
+}
