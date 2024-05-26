@@ -3,16 +3,28 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { DataPropTS } from '@/types/components';
+import { Image as LucideImg } from 'lucide-react';
+
+import { BillboardTS } from '@/types/app';
+
 import { getBillboard, getBillboards } from '@/actions/GET/billboard';
 
-async function Billboard({data: billlboardId}: DataPropTS<string | null>) {
+type BillboardCompTS = {
+    billboard: BillboardTS | null,
+    allowFetchIfNoInput ?: boolean,
+}
 
-    let billboard = billlboardId ? await getBillboard(billlboardId) : await getBillboards();
-    billboard = Array.isArray(billboard) ? billboard[0] : billboard;
+
+async function Billboard({billboard, allowFetchIfNoInput=false} : BillboardCompTS) {
+
+    if (!billboard && allowFetchIfNoInput){
+        const billboards = await getBillboards();
+        billboard = (billboards && billboards.length > 0) ? billboards[0] : null;
+    }
 
     if (!billboard) return (
         <div className="billboard w-full rounded-lg my-2 h-[45dvh] relative bg-gray-200 grid place-content-center"> 
+            <LucideImg className='h-10 w-10 text-white'/>
         </div>
     );
     const {imageUrl, label} = billboard;
@@ -23,6 +35,7 @@ async function Billboard({data: billlboardId}: DataPropTS<string | null>) {
                 src={imageUrl}
                 className={'h-full w-full absolute z-10 top-0 left-0 object-center object-contain'}
                 alt="billboard-img"
+                blurDataURL={imageUrl}
                 width={500}
                 height={300}
                 quality={100}

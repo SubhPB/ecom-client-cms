@@ -2,6 +2,7 @@
 
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
+import nxtLogo from '@/app/favicon.ico'
 
 import "./globals.css";
 
@@ -23,10 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-      <body className={font.className}>
+      <body className={font.className + ' min-h-[100dvh] flex flex-col justify-between flex-shrink-0 scrollbar-cstm'}>
 
         <Header />
-          {children}
+          <section className=" flex flex-col flex-grow-[1] relative">
+            {children}
+          </section>
         <Footer />
 
       </body>
