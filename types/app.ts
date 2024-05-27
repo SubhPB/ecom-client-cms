@@ -1,5 +1,10 @@
 // Byimaan
 
+export interface ImageTS {
+    id: string
+    url: string
+}
+
 export interface ProductTS {
     id: string
     name: string
@@ -7,6 +12,7 @@ export interface ProductTS {
     isFeatured: boolean
     isArchieved: boolean
     colorId: string
+    images: ImageTS[],
 }
 
 export interface BillboardTS {

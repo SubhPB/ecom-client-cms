@@ -14,12 +14,21 @@ export type ClassNamePropTS = {
     className : string
 }
 
+
 export type ClassNameOptPropTS = {
     className ?: string
 }
+
+export type ParentWithClassNamePropTS = ParentPropTS & ClassNameOptPropTS;
 
 export type ParamsPropTS = {
     params : {
         [id: string]: string
     }
 };
+
+export type ParamsPropOptionalTS = {
+    params ?: {
+        [id: string]: string
+    }
+}
