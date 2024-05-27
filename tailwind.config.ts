@@ -15,6 +15,28 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({addUtilities}: {addUtilities: Function}){
+      addUtilities({
+        '.hide-srollbar': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none'
+        },
+        '.hide-scrollbar::-webkit-scrollbar': {
+          'display': 'none'
+        },
+        '.scrollbar-cstm': {
+          '&::-webkit-scrollbar': {
+            width: '4px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'grey',
+            'border-radius':'15px' 
+          }, 
+          
+        }
+      })
+    }
+  ],
 };
 export default config;
