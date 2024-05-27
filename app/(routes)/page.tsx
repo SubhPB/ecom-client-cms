@@ -6,7 +6,7 @@ import Billboard from '@/components/billboard';
 function HomePage() {
   return (
     <div className='w-full px-4'>
-      <Billboard data={null}/>
+      <Billboard billboard={null} allowFetchIfNoInput={true}/>
     </div>
   );
 }
