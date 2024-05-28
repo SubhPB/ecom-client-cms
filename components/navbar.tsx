@@ -20,6 +20,7 @@ async function Navbar({className}: NavbarTS) {
                 link => <NavbarLink key={link.id} {...link}/>
            ) 
         }
+        
     </nav>
   )
 };

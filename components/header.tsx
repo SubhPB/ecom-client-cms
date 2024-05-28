@@ -7,9 +7,9 @@ import Link from 'next/link';
 import NextJsLogo from '@/app/favicon.ico';
 
 import { Menu } from 'lucide-react';
-import { GetServerSideProps } from 'next';
 
 import Navbar from './navbar';  
+import StoreCart from './providers/header-cart';
 
 
 function Header() {
@@ -20,7 +20,11 @@ function Header() {
             Store
         </Link>
         <Navbar className='hidden lg:flex lg:max-w-[50%] lg:overflow-x-scroll hide-scrollbar items-center justify-center gap-4'/>
-        <Link href={'/menu'} className='text-2xl font-bold lg:hidden' > <Menu /> </Link>
+
+        <div className='nav-side-link flex items-center justify-center gap-2'>
+          <StoreCart />
+          <Link href={'/menu'} className='text-2xl font-bold lg:hidden' > <Menu /> </Link>
+        </div>  
     </header>
   )
 };

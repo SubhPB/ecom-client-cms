@@ -16,7 +16,7 @@ function ProductCard({data}: DataPropTS<ProductTS>) {
     const haveImgs = Array.isArray(images) && images.length > 0
 
     return (
-        <div className={`flex-shrink-0 w-[250px] rounded-lg p-2`}>
+        <div className={`flex-shrink-0 w-[250px] rounded-lg p-2 bg-gray-200`}>
             {
                 haveImgs ? <Image
                     height={500}
@@ -26,7 +26,7 @@ function ProductCard({data}: DataPropTS<ProductTS>) {
                     objectFit='cover'
                     objectPosition='center'
                     src={images[0].url}
-                    className='h-[300px] w-full rounded-lg my-2 object-center object-fill'
+                    className='h-[250px] w-full rounded-lg my-2 object-center object-contain'
                 /> : 
                 <BgFallback className='h-[32vh] w-full rounded-lg my-2'/>
             }
