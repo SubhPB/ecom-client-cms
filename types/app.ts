@@ -12,7 +12,8 @@ export interface ProductTS {
     isFeatured: boolean
     isArchieved: boolean
     colorId: string
-    images: ImageTS[],
+    images: ImageTS[]
+    categoryId: string
 }
 
 export interface BillboardTS {

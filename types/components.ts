@@ -32,3 +32,9 @@ export type ParamsPropOptionalTS = {
         [id: string]: string
     }
 }
+
+export type ObjectPropTS< V=string> = {
+    [d : string] : V
+}
+
+export type ClassNameAndDataPropTS<T> = ClassNameOptPropTS & DataPropTS<T>;
