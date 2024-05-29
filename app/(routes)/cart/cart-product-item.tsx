@@ -1,33 +1,66 @@
 // Byimaan
-
-import { getProduct } from '@/actions/GET/products'
-import BgFallback from '@/components/bg-fallback';
 import React from 'react'
 
-type CartProductTS = {
+import { getProduct } from '@/actions/GET/products';
+
+import BgFallback from '@/components/bg-fallback';
+import { CancelItem } from './cart-features';
+import { ItemCounter } from './cart-features';
+// import Image from 'next/image';
+import { MultiImageHolder } from '@/components/gallery';
+
+export type CartProductTS = {
     id: string,
     count: number
-}
-
-// Will restart from here 17:31 (27-05-2024)
+};
 
 async function CartProductItem({id, count}: CartProductTS) {
 
-    // const product = getProduct(id);
+    const product = await getProduct(id);
 
+    if (!product) {
+        return <CartItemSkeleton />
+    }
+
+    const {images, name, price, } = product;
     return (
-        <div className="cart-item w-full bg-gray-400 flex gap-2 p-4">
-            <div className="img h-[250px] w-[230px]">
-                <BgFallback />
+        <div className="cart-item w-full flex gap-2 p-4">
+            <div className="img h-[140px] w-[130px] md:h-[190px] md:w-[180px] flex-shrink-0">
+                <MultiImageHolder images={images.map( i => i.url )}/>
             </div>
-            <div className="text-area flex-grow text-black text-semibold text-sm">
-                <p className='line-clamp-2 text-ellipsis text-xl'>Cart Item</p>
-                <p className='text-gray-400 text-lg'>Price : <span className='text-black'>{`$ ${12}`}</span></p>
-                <p className='text-gray-400'>Selected : <span className='text-black'>{`$ ${count}`}</span></p>
-                <p className='text-gray-400'>Total Price : <span className='text-black'>{`$ ${12*count}`}</span></p>
+            <div className="text-area flex-grow text-black text-bold text-sm relative">
+                <CancelItem id={id}/>
+                <p className='line-clamp-2 text-ellipsis text-xl pr-6'>{name}</p>
+                <p className='text-gray-400'>Price : <span className='text-black'>{`$ ${price}`}</span></p>
+                <p className='text-gray-400'>Selected : <span className='text-black'>{`${count} items`}</span></p>
+                <p className='text-gray-400'>Total Price : <span className='text-black'>{`$ ${Number(price)*count}`}</span></p>
+                <ItemCounter id={id} count={count}/>
             </div>
         </div>
     )
+};
+
+const CartItemSkeleton = () => {
+
+    const TextSkeleton = ({w='w-[60%]', h='h-5'}) => <p className={` rounded-lg bg-gray-200 ${w} ${h}`}></p>
+    return (
+        <div className="cart-item w-full flex gap-2 p-4">
+            <div className="img h-[140px] w-[130px] md:h-[190px] md:w-[180px] flex-shrink-0">
+                <BgFallback />
+            </div>
+            <div className="text-area flex-grow space-y-2">
+                <TextSkeleton />
+                <TextSkeleton w='w-[50%]' />
+                <TextSkeleton w='w-[40%]'/>
+
+            </div>
+    </div>
+    )
+};
+
+export const CartItemWrap = (prop: CartProductTS) => {
+    return <CartProductItem {...prop}/>
 }
+
 
 export default CartProductItem

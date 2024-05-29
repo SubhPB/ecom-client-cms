@@ -7,19 +7,34 @@ import SomethingWentWrong from '@/components/data-not-found';
 
 import { ShoppingCart } from 'lucide-react';
 
+import {CartItemWrap} from './cart-product-item';
+import OrderView from './view-order-ui';
+
+
 function CartPage() {
 
     const cart = useCart();
 
     const allItems = cart?.getAllCartItems() ?? [];
 
-    if (!cart || (allItems.length === 0)){
+    if (!cart || allItems.length === 0){
         return <CartIsEmpty />
-    };
+    }
+   
 
     return (
-        <div className="w-full md:flex my-4 bg-gray-200">
+        <div className="w-full lg:flex my-4 lg:justify-around">
+            <section className='cart-tems w-full lg:w-[48%] space-y-2'>
+                {
+                    allItems.map(
+                        (v, i) => <CartItemWrap key={i} id={v.id} count={v.count}/>
+                    )
+                }
+            </section>
 
+            <section className='order-view w-full lg:w-[48%]'>
+                <OrderView />
+            </section>
         </div>
     )
 };
