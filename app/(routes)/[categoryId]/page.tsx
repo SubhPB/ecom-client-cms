@@ -74,7 +74,7 @@ export function ProductSection({title, data}: ProductSectionTS){
     <div className="product-section w-full mt-2">
       {
         title && 
-        <h1 className='text-3xl font-bold text-zinc-600'>
+        <h1 className='text-3xl font-bold text-zinc-600 border-b-[1.2px] border-black pb-4 my-4'>
           {title}
         </h1>
       }
