@@ -32,3 +32,7 @@ export type ParamsPropOptionalTS = {
         [id: string]: string
     }
 }
+
+export type IdPropTS<A=string> = {
+    id: A
+}

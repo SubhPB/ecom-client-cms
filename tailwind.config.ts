@@ -34,6 +34,12 @@ const config: Config = {
             'border-radius':'15px' 
           }, 
           
+        },
+        '.x-crousel': {
+          'scroll-snap-type': 'x mandatory' 
+        },
+        '.x-crousel-item': {
+          'scroll-snap-align': 'start'
         }
       })
     }

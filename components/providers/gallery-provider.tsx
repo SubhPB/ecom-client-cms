@@ -23,7 +23,7 @@ export const GalleryProvider = ({images, children}:GalleryProviderPropTS) => {
 
     const defaultState: number | null = images.length > 0 ? 0 : null;
     const [currImgIndex, setCurrImgIndex] = useState(defaultState);
-    console.log("Check what i got ", images)
+    
 
     return (
         <GalleryContext.Provider value={{images, currImgIndex, setCurrImgIndex}}>

@@ -1,7 +1,7 @@
 // Byimaan
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 
 import { ClassNamePropTS } from '@/types/components';
@@ -11,8 +11,8 @@ import { useGallery } from './providers/gallery-provider';
 import BgFallback from './bg-fallback';
 import Carousel from './carousel';
 
-// Wil start from here and fix large screen css later...
 
+// will continue to work on MultiImageHolder
 
 function Gallery({className}: ClassNamePropTS) {
 
@@ -27,7 +27,6 @@ function Gallery({className}: ClassNamePropTS) {
 function LargeImage(){
     
     const gallery = useGallery();
-    console.log("Check what is lg image ", gallery)
     
     if (!gallery || gallery?.currImgIndex === null || gallery.images.length === 0) return (
         <div className="w-full md:w-[85%] h-[400px]">
@@ -85,6 +84,48 @@ function SmallImages(){
                 )
             }
         </Carousel>
+    )
+};
+
+type MultiImageHolderTS = {
+    h ?: string,
+    w?: string,
+    images ?: string[]
+}
+
+export function MultiImageHolder({h='h-full', w='w-full', images=[]}: MultiImageHolderTS){
+
+    const [currImage, setCurrImgIndex] = useState(0);
+
+    const moveAble = images.length > 0
+
+    const goBack = () => {
+        if ( moveAble && currImage > 0 ) setCurrImgIndex(i => i - 1);
+    };
+
+
+    const goNext = () => {
+        if (moveAble && currImage < images.length - 1) setCurrImgIndex(i => i + 1);
+    };
+
+    return (
+        <div className={`multi-img relative flex ${h} ${w} bg-gray-200 rounded-xl`}>
+            <div onClick={goBack} className="left-div bg-transparent absolute z-20 w-1/2 top-0 left-0 h-full"></div>
+                { 
+                !moveAble ? <BgFallback />
+                : <Image 
+                    src={images[currImage]}
+                    alt='mul-img-holder'
+                    height={500}
+                    width={300}
+                    quality={100}
+                    objectFit='contain'
+                    objectPosition='center'
+                    className={'h-full w-full object-center object-contain'}
+                />
+                }
+            <div onClick={goNext} className="right-div bg-transparent absolute z-20 w-1/2 top-0 right-0 h-full"></div>
+        </div>
     )
 }
 

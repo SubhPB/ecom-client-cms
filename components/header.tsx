@@ -9,6 +9,7 @@ import NextJsLogo from '@/app/favicon.ico';
 import { Menu } from 'lucide-react';
 
 import Navbar from './navbar';  
+import { FixHydration } from './providers/fix-hydration';
 import StoreCart from './providers/header-cart';
 
 
