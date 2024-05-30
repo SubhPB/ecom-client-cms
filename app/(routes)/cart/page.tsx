@@ -2,32 +2,32 @@
 'use client'
 import React from 'react';
 
-import { useCart } from '@/components/providers/shopping-cart';
 import SomethingWentWrong from '@/components/data-not-found';
 
 import { ShoppingCart } from 'lucide-react';
 
-import {CartItemWrap} from './cart-product-item';
+import CartProductItem from './cart-product-item';
 import OrderView from './view-order-ui';
+
+import { useCart } from '@/components/providers/cart-provider';
 
 
 function CartPage() {
 
     const cart = useCart();
 
-    const allItems = cart?.getAllCartItems() ?? [];
+    const cartItems = cart?.getItems();
 
-    if (!cart || allItems.length === 0){
+    if (!cart || !cartItems || cartItems.length === 0){
         return <CartIsEmpty />
-    }
-   
-
+    }; 
     return (
-        <div className="w-full lg:flex my-4 lg:justify-around">
+        <div className="w-full lg:flex my-4 lg:justify-around space-y-2 lg: ">
+            
             <section className='cart-tems w-full lg:w-[48%] space-y-2'>
                 {
-                    allItems.map(
-                        (v, i) => <CartItemWrap key={i} id={v.id} count={v.count}/>
+                    cartItems.map(
+                        (item, i) => <CartProductItem key={i} data={item}/>
                     )
                 }
             </section>
@@ -35,6 +35,7 @@ function CartPage() {
             <section className='order-view w-full lg:w-[48%]'>
                 <OrderView />
             </section>
+            
         </div>
     )
 };

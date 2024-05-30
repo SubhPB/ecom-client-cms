@@ -14,7 +14,9 @@ const Layout = ({ children }: Readonly<{
   return (
     <>
       <main className='store-cart-layout flex-grow px-4'>
-        {children}
+        
+          {children}
+        
       </main>
     </>
   );
