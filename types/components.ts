@@ -33,14 +33,11 @@ export type ParamsPropOptionalTS = {
     }
 }
 
-<<<<<<< HEAD
 export type ObjectPropTS< V=string> = {
     [d : string] : V
 }
 
 export type ClassNameAndDataPropTS<T> = ClassNameOptPropTS & DataPropTS<T>;
-=======
 export type IdPropTS<A=string> = {
     id: A
 }
->>>>>>> feat/cart-page
