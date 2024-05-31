@@ -1,7 +1,7 @@
 // Byimaan
 
 import React from 'react';
-import { DataPropTS, ObjectPropTS, ParamsPropTS } from '@/types/components';
+import {  ObjectPropTS, ParamsPropTS } from '@/types/components';
 
 import { getProduct } from '@/actions/GET/products';
 
@@ -11,6 +11,8 @@ import SomethingWentWrong from '@/components/data-not-found';
 import { ShoppingCart } from 'lucide-react';
 import { getCategory } from '@/actions/GET/category';
 import { ProductSection } from '../../[categoryId]/page';
+
+import AddToCartButton from './add-to-cart-btn';
 
 async function ProductPage({params}: ParamsPropTS) {
 
@@ -40,7 +42,7 @@ async function ProductPage({params}: ParamsPropTS) {
         )
     };
 
-    const {images=[], name, price, categoryId} = product;
+    const {id, images=[], name, price, categoryId} = product;
 
     return (
         <div className="w-full">
@@ -56,9 +58,7 @@ async function ProductPage({params}: ParamsPropTS) {
                         <h1 className='text-3xl line-clamp-2 text-ellipsis'>{name[0].toUpperCase()+name.slice(1).toLowerCase()}</h1>
                         <h2 className='text-lg text-semibold my-1 opacity-80'>{`$ ${price}`}</h2>
                     </div>
-                    <button className='text-white font-semibold rounded-2xl text-lg px-4 py-2 bg-black flex gap-2 items-center'>
-                        Add to cart {<ShoppingCart className=' h-6 w-6'/>}
-                    </button>
+                    <AddToCartButton id={id}/>
                 </div>
             </div>
             <MoreItemsFromThisCategory categoryId={categoryId} productId={params.productId}/>

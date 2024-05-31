@@ -37,7 +37,7 @@ function OrderView() {
             )
           )
         }
-        <h1>Order Total : ${totalPrice}</h1>
+        <h1 className='font-bold '>Order Total : <span className='text-green-500 '>${totalPrice}</span></h1>
         <div className="w-full grid place-content-center">
           <button className='bg-black text-white px-4 py-2 rounded-2xl flex gap-2 items-center justify-center' disabled={noOrder}><ShoppingBag className='h-6 w-6'/> Checkout</button>
         </div>
