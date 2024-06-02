@@ -19,7 +19,9 @@ export type CartContextTS = {
     decrementCount: (id: string) => void;
     getItem: (id: string) => CartItemTS | null;
     getItems: () => CartItemTS[];
+    getRawItemsData: () => LocalDataTS[]
     removeItem: (id: string) => void;
+    removeAll: () => void;
 };
 
 const CartContext = createContext<CartContextTS | null>(null);
@@ -67,6 +69,13 @@ export const CartProvider = ({children}: ParentPropTS) => {
         decrementCount: (id) => useCart.updateCount(id, -1),
         getItem: (id) => items.find(item => item.id === id) || null,
         getItems: () => items,
+        getRawItemsData: () => {
+            return items.map(
+                item => ({
+                    id: item.id, count: item.count
+                })
+            )
+        },
         removeItem: (id) => {
             // check does any item exists with this id.
             if (items.map(item => item.id === id)){
@@ -74,6 +83,9 @@ export const CartProvider = ({children}: ParentPropTS) => {
                     items => items.filter(item => item.id !== id)
                 );
             }
+        },
+        removeAll: () => {
+            setItems([]);
         }
     }
 
